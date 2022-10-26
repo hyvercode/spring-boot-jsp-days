@@ -2,13 +2,13 @@ spring:
   datasource:
     url: jdbc:h2:file:./h2/data/springjsp
     username: sa
-    password: 
+    password: password
     driverClassName: org.h2.Driver
   jpa:
      hibernate:
        ddl-auto: none
      show-sql: true
-     pen-in-view: false
+     open-in-view: false
      generate-ddl: true
      database: h2
      database-platform: org.hibernate.dialect.H2Dialect

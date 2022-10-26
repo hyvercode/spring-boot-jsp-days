@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./h2/data/springjsp
+    username: sa
+    password: 
+    driverClassName: org.h2.Driver
+  jpa:
+     hibernate:
+       ddl-auto: none
+     show-sql: true
+     pen-in-view: false
+     generate-ddl: true
+     database: h2
+     database-platform: org.hibernate.dialect.H2Dialect
+     defer-datasource-initialization: true
+   
+  h2:
+    console.enabled: true
+    
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+      
+   

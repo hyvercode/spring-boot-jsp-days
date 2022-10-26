@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div class="mt-2">
-		<table class="table table-hover">
+		<table class="table table-hover" aria-label="users">
 			<thead>
 				<tr class="table-active">
 					<th scope="col">No.</th>

@@ -2,6 +2,8 @@ package com.hyvercode.springjsp.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hyvercode.springjsp.model.entity.User;
 import com.hyvercode.springjsp.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -39,20 +44,48 @@ public class UserController {
 	@PostMapping("/user")
 	public String user(ModelMap model, User user) {
 
-		userService.create(user);
+		try {
+			userService.create(user);
+		} catch (Exception e) {
+			log.error("Craate user {}" + e.getMessage());
+			model.put("error", "Internal server error");
+
+			return "redirect:/users";
+		}
 
 		return "redirect:/users";
 	}
 
-	@GetMapping("/edit/{id}")
+	@GetMapping("/user/{id}")
 	public String edit(ModelMap model, @PathVariable("id") String id) {
 
-		return "redirect:/user";
+		User user = userService.show(id);
+		if (user == null) {
+			model.put("error", "User not found");
+			return "redirect:/users";
+
+		}
+		model.put("user", user);
+
+		return "user-edit";
 	}
 
-	
+	@PostMapping("/user/update")
+	public String update(ModelMap model, User user) {
+
+		userService.update(user);
+
+		return "redirect:/users";
+	}
+
 	@GetMapping("/delete/{id}")
 	public String user(ModelMap model, @PathVariable("id") String id) {
+
+		User user = userService.show(id);
+		if (user == null) {
+			model.put("error", "User not found");
+			return "redirect:/users";
+		}
 
 		userService.delete(id);
 

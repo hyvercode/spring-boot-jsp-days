@@ -7,5 +7,7 @@ import com.hyvercode.springjsp.model.entity.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String>{
+	
+	User findByUserId(String userId);
 
 }

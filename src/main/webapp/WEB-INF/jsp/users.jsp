@@ -4,7 +4,7 @@
 	<div class="d-flex justify-content-between mt-5">
 		<h5>Users</h5>
 		<div>
-			<a href="/users/paginate?page=${page.number+1}&size=${page.size}"
+			<a href="/users?page=${page.number+1}&size=${page.size}"
 				class="btn btn-primary">Refresh</a> <a href="/users/user"
 				class="btn btn-primary">Create</a>
 		</div>
@@ -36,33 +36,34 @@
 			</tbody>
 		</table>
 		<div class="mb-1">
-			<form method="GET" action="/users/paginate?"
+			<form method="GET" action="/users?"
 				class="d-flex justify-content-between">
 				<input type="text" id="page" name="page" value="1" hidden>
 				<nav>
 					<ul class="pagination">
 						<c:if test="${page.hasPrevious()}">
 							<li class="page-item"><a class="page-link"
-								href="/users/paginate?page=${page.number}&size=${page.size}">Prev</a></li>
+								href="/users?page=${page.number}&size=${page.size}">Prev</a></li>
 						</c:if>
 						<li class="page-item"><a class="page-link">${page.number +1}</a></li>
 						<li class="page-item active" aria-current="page"><a
 							class="page-link">/</a></li>
 						<li class="page-item"><a class="page-link">${page.totalPages}</a></li>
-						<c:if test="${page.number+1 < page.totalPages}">
+						<c:if test="${!page.last}">
 							<li class="page-item"><a class="page-link"
-								href="/users/paginate?page=${page.number + 2}&size=${page.size}">Next</a></li>
+								href="/users?page=${page.number + 2}&size=${page.size}">Next</a></li>
 						</c:if>
 					</ul>
 				</nav>
 				<div class="d-flex p-1">
-					<label class="label-control p-2">Rows: </label> <select id="size"
-						name="size" class="form-select form-select-sm"
+					<label class="p-2">Rows: </label> <select id="size" name="size"
+						class="form-select form-select-sm" value="{$page.size}"
 						onchange="this.form.submit()">
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="100">100</option>
-						<option value="${page.totalPages}">All</option>
+						<option value="5" ${page.size==5?'selected':''}>5</option>
+						<option value="10" ${page.size==10?'selected':''}>10</option>
+						<option value="100" ${page.size==100?'selected':''}>100</option>
+						<option value="${page.totalElements}"
+							${page.size==page.totalElements?'selected':''}>All</option>
 					</select>
 				</div>
 			</form>

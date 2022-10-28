@@ -23,13 +23,15 @@
 								required="required" />
 						</div>
 						<div class="form-group mb-3">
-							<label class="label-control">Active</label> <select id="isActive"
+							<label class="label-control">Active</label>
+							 <select id="isActive"
 								name="isActive" class="form-select" required="required">
 								<option value="true">Yes</option>
 								<option value="false">No</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-success">Save</button>
+						<button class="btn btn-warning mr-2" onclick="history.back()">Cancel</button>
+						<button type="submit" class="btn btn-primary">Save</button>
 					</form>
 				</div>
 			</div>

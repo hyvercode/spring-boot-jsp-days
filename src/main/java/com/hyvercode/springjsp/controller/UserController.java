@@ -29,14 +29,6 @@ public class UserController {
 	}
 
 	@GetMapping("")
-	public String users(ModelMap model) {
-		List<User> users = userService.all();
-		model.put("users", users);
-
-		return "users";
-	}
-
-	@GetMapping("/paginate")
 	public String users(ModelMap model, @PageableDefault(size = 5, page = 1) Pageable pageable) {
 		Page<User> users = userService.findPaginated(pageable);
 		model.put("page", users);
@@ -59,10 +51,10 @@ public class UserController {
 			log.error("Craate user {}" + e.getMessage());
 			model.put("error", "Internal server error");
 
-			return "redirect:/users/paginate?page=1&size=5";
+			return "redirect:/users?page=1&size=5";
 		}
 
-		return "redirect:/users/paginate?page=1&size=5";
+		return "redirect:/users?page=1&size=5";
 	}
 
 	@GetMapping("/user/{id}")
@@ -71,7 +63,7 @@ public class UserController {
 		User user = userService.show(id);
 		if (user == null) {
 			model.put("error", "User not found");
-			return "redirect:/users/paginate?page=1&size=5";
+			return "redirect:/users?page=1&size=5";
 
 		}
 		model.put("user", user);
@@ -84,7 +76,7 @@ public class UserController {
 
 		userService.update(user);
 
-		return "redirect:/users/paginate?page=1&size=5";
+		return "redirect:/users?page=1&size=5";
 	}
 
 	@GetMapping("/delete/{id}")
@@ -98,7 +90,7 @@ public class UserController {
 
 		userService.delete(id);
 
-		return "redirect:/users/paginate?page=1&size=5";
+		return "redirect:/users?page=1&size=5";
 	}
 
 }

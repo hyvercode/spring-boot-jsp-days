@@ -33,11 +33,12 @@
 							<label class="label-control">Active</label> <select id="isActive"
 								name="isActive" class="form-select" value="${user.isActive}"
 								required="required">
-								<option value="true">Yes</option>
-								<option value="false">No</option>
+								<option value="true" ${user.isActive?'selected':''}>Yes</option>
+								<option value="false" ${user.isActive?'':'selected'}>No</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-success">Update</button>
+						<button class="btn btn-warning mr-2" onclick="history.back()">Cancel</button>
+						<button type="submit" class="btn btn-primary">Update</button>
 					</form>
 				</div>
 			</div>

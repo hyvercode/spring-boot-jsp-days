@@ -3,12 +3,17 @@ package com.hyvercode.springjsp.service;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.hyvercode.springjsp.model.entity.User;
 import com.hyvercode.springjsp.repository.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UserService {
 
@@ -16,6 +21,11 @@ public class UserService {
 
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
+	}
+
+	public Page<User> findPaginated(Pageable pageable) {
+		
+		return userRepository.findAll(pageable);
 	}
 
 	public List<User> all() {

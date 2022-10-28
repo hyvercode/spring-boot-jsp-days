@@ -23,8 +23,7 @@
 								required="required" />
 						</div>
 						<div class="form-group mb-3">
-							<label class="label-control">Active</label>
-							 <select id="isActive"
+							<label class="label-control">Active</label> <select id="isActive"
 								name="isActive" class="form-select" required="required">
 								<option value="true">Yes</option>
 								<option value="false">No</option>

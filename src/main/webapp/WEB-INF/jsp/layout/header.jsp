@@ -38,6 +38,10 @@
 <body>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			console.log("ready!");
+		});
+
+		$(document).ready(function() {
 			window.setTimeout(function() {
 				$(".alert").fadeTo(200, 0).slideUp(200, function() {
 					$(this).remove();

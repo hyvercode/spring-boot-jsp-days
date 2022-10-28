@@ -4,8 +4,9 @@
 	<div class="d-flex justify-content-between mt-5">
 		<h5>Users</h5>
 		<div>
-			<a href="/users" class="btn btn-primary">Refresh</a> <a
-				href="/users/user" class="btn btn-primary">Create</a>
+			<a href="/users/paginate?page=${page.number+1}&size=${page.size}"
+				class="btn btn-primary">Refresh</a> <a href="/users/user"
+				class="btn btn-primary">Create</a>
 		</div>
 	</div>
 	<div class="mt-2">
@@ -21,9 +22,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="user" items="${users}" varStatus="loop">
+				<c:forEach var="user" items="${page.content}" varStatus="loop">
 					<tr onclick="alert(${user.userId})">
-						<th scope="row">${loop.index+1}</th>
+						<th scope="row">${(page.number) * page.size + loop.index + 1}</th>
 						<td>${user.name}</td>
 						<td>${user.email}</td>
 						<td>${user.birthDate}</td>
@@ -34,7 +35,38 @@
 				</c:forEach>
 			</tbody>
 		</table>
-
+		<div class="mb-1">
+			<form method="GET" action="/users/paginate?"
+				class="d-flex justify-content-between">
+				<input type="text" id="page" name="page" value="1" hidden>
+				<nav>
+					<ul class="pagination">
+						<c:if test="${page.hasPrevious()}">
+							<li class="page-item"><a class="page-link"
+								href="/users/paginate?page=${page.number}&size=${page.size}">Prev</a></li>
+						</c:if>
+						<li class="page-item"><a class="page-link">${page.number +1}</a></li>
+						<li class="page-item active" aria-current="page"><a
+							class="page-link">/</a></li>
+						<li class="page-item"><a class="page-link">${page.totalPages}</a></li>
+						<c:if test="${page.number+1 < page.totalPages}">
+							<li class="page-item"><a class="page-link"
+								href="/users/paginate?page=${page.number + 2}&size=${page.size}">Next</a></li>
+						</c:if>
+					</ul>
+				</nav>
+				<div class="d-flex p-1">
+					<label class="label-control p-2">Rows: </label> <select id="size"
+						name="size" class="form-select form-select-sm"
+						onchange="this.form.submit()">
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="100">100</option>
+						<option value="${page.totalPages}">All</option>
+					</select>
+				</div>
+			</form>
+		</div>
 		<c:if test="${!empty error}">
 			<div class="alert alert-danger alert-dismissible fade show"
 				role="alert">

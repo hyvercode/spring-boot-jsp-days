@@ -11,7 +11,7 @@ public class IndexController {
 
 	@GetMapping("")
 	public String showLoginPage(ModelMap model) {
-		model.put("name", "hyvercode.com");
+		model.put("name", "Spring boot + JSP + H2 tutorial, by <a href='https://www.hyvercode.com' _target='blank' >hyvercode.com</a>");
 		return "index";
 	}
 

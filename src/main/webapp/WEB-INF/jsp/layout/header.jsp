@@ -34,7 +34,7 @@
 	text-align: center;
 }
 </style>
-</head>
+</html>
 <body>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -46,6 +46,6 @@
 				$(".alert").fadeTo(200, 0).slideUp(200, function() {
 					$(this).remove();
 				});
-			}, 4000);
+			}, 350);
 		});
 	</script>

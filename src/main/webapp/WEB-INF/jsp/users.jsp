@@ -1,6 +1,25 @@
 <%@ include file="layout/navigation.jsp"%>
 
 <div class="container">
+	<div class="warning mt-4">
+		<c:if test="${!empty error}">
+			<div class="alert alert-danger alert-dismissible fade show"
+				 role="alert">
+				<strong><%=response.getStatus()%></strong> Error: ${error}
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+			</div>
+		</c:if>
+
+		<c:if test="${empty error}">
+			<div class="alert alert-success alert-dismissible fade show"
+				 role="alert">
+				<strong><%=response.getStatus()%></strong> Success
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+						aria-label="Close"></button>
+			</div>
+		</c:if>
+	</div>
 	<div class="d-flex justify-content-between mt-5">
 		<h5>Users</h5>
 		<div>
@@ -68,22 +87,5 @@
 				</div>
 			</form>
 		</div>
-		<c:if test="${!empty error}">
-			<div class="alert alert-danger alert-dismissible fade show"
-				role="alert">
-				<strong><%=response.getStatus()%></strong> Error: ${error}
-				<button type="button" class="btn-close" data-bs-dismiss="alert"
-					aria-label="Close"></button>
-			</div>
-		</c:if>
-
-		<c:if test="${empty error}">
-			<div class="alert alert-success alert-dismissible fade show"
-				role="alert">
-				<strong><%=response.getStatus()%></strong> Success
-				<button type="button" class="btn-close" data-bs-dismiss="alert"
-					aria-label="Close"></button>
-			</div>
-		</c:if>
 	</div>
 </div>

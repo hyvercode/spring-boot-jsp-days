@@ -1,9 +1,9 @@
 
 <div class="footer">
-    <h1>
+    <h6>
         <a href="https://hyvercode.com">
         Spring Boot Tutorial</a>
-    </h1>
+    </h6>
 </div>
 </body>
 </html>
